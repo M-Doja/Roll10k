@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Randoms</title>
+    <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <style media="screen">
+      body{padding-top: 1.75em;}
+      .display h3{display: inline-block;margin-top: 2em;}
+        a {text-decoration: none;}
+        .nums {padding-top: .05em;}
+        #one, #two, #three, #four, #five ,.adwa{height: 60px;width: 60px;background: #aaa;display: inline-block;}
+        li{list-style: none;}
+        #gameWrap{margin-bottom:4em; }
+        tr{display: inline;margin: 0 auto}
+        table{margin: auto}
+        .diceNumber{min-width:115px;}
+    </style>
+  </head>
+  <body class="container">
+  <h1 class="text-center"> Roll10k</h1>
+
+  <ul class="well text-center">
+    <h4>Rules: Make it to 10,000 points to win</h4>
+    <ol>
+      * Roll a 1 = 100pts
+    </ol><br>
+    <ol>
+      * Roll a 5 = 50pts
+    </ol><br>
+    <ol>
+      * Roll three 1's = 1000pts
+    </ol><br>
+    <ol>
+      * Roll 3 of a kind = The rolled number multiplied by 100pts <br>The exception is 1's <br>
+    </ol><br>
+    <ol>
+      * Roll 4 of a kind = The rolled number multiplied by 100pts + 100pts
+    </ol><br>
+    <ol>
+      * Roll 5 of a kind = If fives 1's are rolled you get 10,000 pts. You Win!<br>Otherwise you get the rolled number multiplied by 100pts + 200pts
+    </ol><br>
+    <ol>
+      * Click number to save points and to continue rolling remaining numbers.<br> However if you roll and get no points you lose all points from your current turn <br>and your turn is over.
+    </ol>
+  </ul>
+    <div id="gameWrap">
+      <div id="results"></div><hr>
+
+      <div id="controls"></div>
+
+      <table id="table_vendor">
+        <thead>
+            <tr>
+                <th>0 pts</th>
+            </tr>
+        </thead>
+        <span id="count">0</span><br>
+        <span id="score">Score: 0 pts rolled</span>
+        <tbody></tbody>
+      </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script src="roll.js" charset="utf-8"></script>
+  </body>
+</html>

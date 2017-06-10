@@ -1,0 +1,176 @@
+var arr = [];
+const ctrl = document.querySelector('div #controls');
+const thead = document.querySelector('thead th');
+thead.textContent = '10,000';
+
+// FUNCTION TO CREATE ELEMENTS
+function createElement(el, attr, attrValue) {
+  var newElement = document.createElement(el);
+  newElement.setAttribute(attr, attrValue);
+  return newElement;
+}
+
+// CREATE MAIN ROLL BTN
+const btnMain = createElement('button', 'id', 'mainBtn');
+btnMain.textContent = 'Click to roll';
+ctrl.appendChild(btnMain);
+
+// CREATE ROLL DISPLAY
+const tbody = document.querySelector('tbody');
+for (var i = 0; i < 5; i++) {
+  const td = createElement('td', 'class', 'diceBlock');
+  const btn = createElement('button', 'class', 'diceClick');
+  const tdDiv = createElement('div', 'class', 'diceNumber')
+  btn.textContent = 'Save Die #'+(i + 1)+' roll';
+  td.appendChild(btn);
+  td.appendChild(tdDiv);
+  tbody.appendChild(td);
+}
+
+// INITIALIZE DICE VALUE
+var dice1 = document.querySelectorAll('.diceNumber')[0];
+var dice2 = document.querySelectorAll('.diceNumber')[1];
+var dice3 = document.querySelectorAll('.diceNumber')[2];
+var dice4 = document.querySelectorAll('.diceNumber')[3];
+var dice5 = document.querySelectorAll('.diceNumber')[4];
+dice1.textContent = 0,
+dice2.textContent = 0,
+dice3.textContent = 0,
+dice4.textContent = 0,
+dice5.textContent = 0;
+var DICE = [];
+DICE.push(dice1,dice2,dice3,dice4,dice5);
+console.log(DICE);
+
+const holdArr = [];
+const savedNum = {};
+const number = {};
+const diceNumbers = document.querySelectorAll('.diceBlock');
+//
+// function getNumberIdx(){
+//   for (var i = 0; i < diceNumbers.length; i++) {
+//     number.dieNum = diceNumbers[i];
+//     number.dieIdx = i;
+//     console.log("this is the single "+diceNumbers[i].innerHTML + ": "+i);
+//     console.log("Number Obj : "+number.dieNum.inner);
+//     return number;
+//
+//   }
+// }
+for (var i = 0; i < diceNumbers.length; i++) {
+  var die = diceNumbers[i];
+  die.addEventListener("click", function(e){
+  die = e.target
+  console.log(die.innerHTML);
+
+  const notSaved = 'Save Die #'+(i + 1)+' roll';
+  const saved = 'Die #'+(i + 1)+' saved!';
+
+  if(die.textContent == saved){
+      die.removeAttribute('class', 'saved');
+      die.innerHTML = notSaved;
+
+      var selected = document.querySelectorAll('div .diceNumber');
+      console.log(selected);
+
+      // for (var i = 0; i < selected.length; i++) {
+      //   console.log('Goodboy');
+      //   selected[i].addEventListener('click', (e) => {
+      //     console.log("Target here: "+e.target);
+      //     console.log(arr);
+      //     selected[i] = e.target;
+      //     console.log(selected[i].innerHTML);
+      //
+      //   })
+      // }
+  }
+   else if(die.textContent == notSaved) {
+      die.setAttribute('class', 'saved');
+      die.textContent = saved;
+      var txtDisplay = die.nextSibling;
+      savedNum.index = i +1;
+      savedNum.num = txtDisplay.innerHTML;
+      console.log(txtDisplay.innerHTML);
+      holdArr.push(savedNum);
+      console.log(holdArr);
+  }
+
+
+  });
+}
+
+
+
+
+// CLICK TO RUN MAIN DICE ROLL FUNCTION
+btnMain.addEventListener('click', () => {
+  rollDice();
+});
+
+
+//CREATE RANDOM NUMBER
+function randomNumber(){
+  var num = Math.floor((Math.random() * 6) + 1);
+  return num;
+}
+randomNumber();
+
+
+function findDup(num, array){
+  var indices = [];
+  var el = num;
+  var idx = array.indexOf(el);
+  while (idx != -1) {
+    indices.push(idx);
+    idx = array.indexOf(el, idx + 1);
+  }
+  return indices;
+}
+
+
+// FUNCTION TO ROLL DICE
+// stores random number in arr
+function rollDice(){
+  // Clear arr
+  arr = [];
+  // Check for diceObj in hold array
+    // Code Goes Here
+
+  // If dice not in hold array roll dice
+  dice1.textContent = randomNumber();
+  var d1 = Number(dice1.textContent);
+  dice2.textContent = randomNumber();
+  var d2 = Number(dice2.textContent);
+  dice3.textContent = randomNumber();
+  var d3 = Number(dice3.textContent);
+  dice4.textContent = randomNumber();
+  var d4 = Number(dice4.textContent);
+  dice5.textContent = randomNumber();
+  var d5 = Number(dice5.textContent);
+  arr.push(d1, d2, d3, d4, d5);
+
+  var indices1 = findDup(1,arr);
+  var indices2 = findDup(2,arr);
+  var indices3 = findDup(3,arr);
+  var indices4 = findDup(4,arr);
+  var indices5 = findDup(5,arr);
+
+
+
+  if (indices1.length === 3) {
+    var ones = indices1.length * 1000;
+  }else if (indices1.length === 3) {
+    var ones = indices1.length * 1100;
+  }else if (indices1.length === 5) {
+    var ones = indices1.length * 10000;
+    console.log("YOU WON!!");
+  }else {
+    var ones = indices1.length * 100;
+  }
+
+
+  var fives = indices5.length * 50;
+  console.log("Total: "+(Number(ones) + Number(fives)));
+  console.log(arr);
+  return arr;
+}

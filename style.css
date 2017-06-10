@@ -1,0 +1,15 @@
+/*dv holding control btn*/
+#controls {
+  text-align: center;
+}
+
+/*space around control btns*/
+.space {
+  margin: 0 1.5em;
+  text-align: center;
+}
+
+
+td {
+  text-align: center;
+}
